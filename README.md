@@ -70,7 +70,9 @@ Box/
 │   ├── item-statistics.html
 │   ├── white-noise.html
 │   └── map-pins.html
-└── position_open.txt            # OpenStreetMap坐标数据源
+├── position.txt                 # 高德地图坐标数据源
+├── position_open.txt            # OpenStreetMap坐标数据源
+└── convert_coordinates.py       # 坐标转换脚本
 ```
 
 ## 快速开始
