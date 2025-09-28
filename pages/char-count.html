@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符重复统计 - Box 工具集合</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="tool-page">
+        <header class="tool-header">
+            <div class="container">
+                <a href="../index.html" class="back-btn">
+                    ← 返回首页
+                </a>
+                <div class="header-content">
+                    <h1>🔢 字符重复统计</h1>
+                    <p>统计每行中每个字符的重复次数，支持多种统计模式</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="tool-content">
+            <div class="input-section">
+                <h2 class="section-title">输入文本</h2>
+                <textarea 
+                    class="textarea input-textarea" 
+                    placeholder="请输入要统计的文本...&#10;&#10;示例：&#10;hello world&#10;programming&#10;javascript"
+                ></textarea>
+                
+                <div class="options">
+                    <div class="option-group">
+                        <label for="count-mode">统计模式：</label>
+                        <select id="count-mode">
+                            <option value="per-line">按行统计</option>
+                            <option value="all-lines">全部文本统计</option>
+                            <option value="line-by-line">逐行详细统计</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="case-sensitive">
+                            <input type="checkbox" id="case-sensitive">
+                            区分大小写
+                        </label>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="ignore-spaces">
+                            <input type="checkbox" id="ignore-spaces" checked>
+                            忽略空格
+                        </label>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="ignore-punctuation">
+                            <input type="checkbox" id="ignore-punctuation">
+                            忽略标点符号
+                        </label>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="sort-by">排序方式：</label>
+                        <select id="sort-by">
+                            <option value="count-desc">按出现次数降序</option>
+                            <option value="count-asc">按出现次数升序</option>
+                            <option value="char-asc">按字符升序</option>
+                            <option value="char-desc">按字符降序</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn process-btn">开始统计</button>
+                    <button class="btn btn-secondary clear-btn">清空</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2 class="section-title">统计结果</h2>
+                <div class="output-text" style="min-height: 200px; background: white; border: 2px solid #e9ecef; border-radius: 8px; padding: 1rem; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;"></div>
+                <div class="button-group" style="margin-top: 1rem;">
+                    <button class="btn copy-btn">复制结果</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/char-count.js"></script>
+</body>
+</html>

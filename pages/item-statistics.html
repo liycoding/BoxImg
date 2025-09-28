@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表项统计 - Box 工具集合</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="tool-page">
+        <header class="tool-header">
+            <div class="container">
+                <a href="../index.html" class="back-btn">
+                    ← 返回首页
+                </a>
+                <div class="header-content">
+                    <h1>📊 列表项统计</h1>
+                    <p>统计文本列表中每个项目出现的次数，支持导出到Excel</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="tool-content">
+            <div class="input-section">
+                <h2 class="section-title">输入文本</h2>
+                <textarea 
+                    class="textarea input-textarea" 
+                    placeholder="请输入要统计的文本列表，每行一个项目...&#10;&#10;示例：&#10;苹果&#10;香蕉&#10;苹果&#10;橙子&#10;香蕉&#10;葡萄"
+                ></textarea>
+                
+                <div class="options">
+                    <div class="option-group">
+                        <label for="case-sensitive">
+                            <input type="checkbox" id="case-sensitive">
+                            区分大小写
+                        </label>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="trim-whitespace">
+                            <input type="checkbox" id="trim-whitespace" checked>
+                            去除首尾空格
+                        </label>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="sort-by">排序方式：</label>
+                        <select id="sort-by">
+                            <option value="original-order" selected>按原内容顺序</option>
+                            <option value="count-desc">按出现次数降序</option>
+                            <option value="count-asc">按出现次数升序</option>
+                            <option value="name-asc">按名称升序</option>
+                            <option value="name-desc">按名称降序</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="result-format">结果格式：</label>
+                        <select id="result-format">
+                            <option value="simple" selected>简洁版</option>
+                            <option value="standard">标准版</option>
+                            <option value="percentage">百分比版</option>
+                            <option value="detailed">详细版</option>
+                            <option value="table">表格版</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn process-btn">开始统计</button>
+                    <button class="btn btn-secondary clear-btn">清空</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2 class="section-title">统计结果</h2>
+                <div class="output-text" style="min-height: 200px; background: white; border: 2px solid #e9ecef; border-radius: 8px; padding: 1rem; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;"></div>
+                <div class="button-group" style="margin-top: 1rem;">
+                    <button class="btn copy-btn">复制结果</button>
+                    <button class="btn btn-secondary export-excel-btn">导出Excel</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/item-statistics.js"></script>
+</body>
+</html>

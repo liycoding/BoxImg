@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地图图钉工具 - Box 工具集合</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* 自定义缩放控制样式 */
+        .leaflet-control-zoom {
+            background: white !important;
+            border-radius: 4px !important;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.4) !important;
+        }
+        
+        .leaflet-control-zoom-in,
+        .leaflet-control-zoom-out {
+            background-color: white !important;
+            border: none !important;
+            color: #333 !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+            line-height: 26px !important;
+            text-align: center !important;
+            text-decoration: none !important;
+            width: 30px !important;
+            height: 30px !important;
+            display: block !important;
+        }
+        
+        .leaflet-control-zoom-in:hover,
+        .leaflet-control-zoom-out:hover {
+            background-color: #f4f4f4 !important;
+            color: #000 !important;
+        }
+        
+        .leaflet-control-zoom-in:active,
+        .leaflet-control-zoom-out:active {
+            background-color: #e6e6e6 !important;
+        }
+    </style>
+    <style>
+        .map-container {
+            height: 75vh;
+            width: 100%;
+            max-width: none;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #e9ecef;
+            margin-bottom: 2rem;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .info-panel {
+            background: #f8f9fa;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            max-width: 300px;
+        }
+        
+        .info-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .tool-content {
+                flex-direction: column !important;
+            }
+            
+            .input-section {
+                flex: none !important;
+                width: 100% !important;
+            }
+            
+            .info-panel {
+                max-width: none !important;
+            }
+            
+            .map-container {
+                height: 60vh;
+            }
+            
+            .info-stats {
+                gap: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .map-container {
+                height: 50vh;
+            }
+            
+            .info-stats {
+                gap: 0.8rem;
+            }
+            
+            .stat-number {
+                font-size: 1rem;
+            }
+            
+            .status-row {
+                flex-direction: column !important;
+                gap: 0.8rem !important;
+            }
+            
+            .status-row .data-info {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .status-row .info-stats {
+                gap: 1rem !important;
+            }
+        }
+        
+        /* 确保页面内容占满全屏宽度 */
+        .tool-page {
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* 数据信息样式 */
+        .status-row .data-info {
+            flex-shrink: 0;
+        }
+        
+        .status-row .info-stats {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-row .stat-item {
+            text-align: center;
+        }
+        
+        .status-row .stat-number {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .status-row .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.2rem;
+        }
+        
+        .status-row .options {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .status-row .btn {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+        }
+        
+        .tool-content {
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 1rem !important;
+        }
+        
+        .input-section,
+        .output-section {
+            max-width: none !important;
+            margin: 0 0 1rem 0 !important;
+        }
+        
+        @media (min-width: 1200px) {
+            .map-container {
+                height: 80vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-page">
+        <header class="tool-header">
+            <div class="container">
+                <a href="../index.html" class="back-btn">
+                    <span>←</span> 返回首页
+                </a>
+                <div class="header-content">
+                    <h1>📍 地图图钉工具</h1>
+                    <p>显示position_open.txt文件中的OpenStreetMap坐标数据</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="tool-content">
+            <div class="map-section">
+                <div class="status-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                    <div id="mapStatus" class="status-message status-info" style="margin-bottom: 0;">
+                        正在初始化地图...
+                    </div>
+                    <div class="data-info" style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="info-stats" style="display: flex; gap: 1.5rem;">
+                            <div class="stat-item">
+                                <div class="stat-number" id="totalPins">-</div>
+                                <div class="stat-label">总图钉数</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="loadedPins">-</div>
+                                <div class="stat-label">已加载</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="displayedPins">-</div>
+                                <div class="stat-label">已显示</div>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <button class="btn process-btn" id="loadDataBtn">📍 加载数据</button>
+                            <button class="btn btn-secondary clear-btn" id="clearDataBtn">🗑️ 清空</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+                <div id="loadingInfo" class="loading" style="display: none;">
+                    <div class="loading"></div>
+                    <p>正在加载数据...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/map-pins.js"></script>
+</body>
+</html>

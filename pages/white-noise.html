@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>白噪音生成器 - Box 工具集合</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="tool-page">
+        <header class="tool-header">
+            <div class="container">
+                <a href="../index.html" class="back-btn">
+                    <span>←</span> 返回首页
+                </a>
+                <div class="header-content">
+                    <h1>🎵 白噪音生成器</h1>
+                    <p>生成指定时长的白噪音音频，支持在线播放和下载</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="tool-content">
+            <div class="input-section">
+                <h2 class="section-title">生成设置</h2>
+                <div class="options">
+                    <div class="option-group">
+                        <label for="duration">时长（秒）:</label>
+                        <input type="number" id="duration" min="1" max="600" value="60" step="1">
+                    </div>
+                    <div class="option-group">
+                        <label for="channels">声道数:</label>
+                        <select id="channels">
+                            <option value="1">单声道</option>
+                            <option value="2" selected>立体声</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="sampleRate">采样率:</label>
+                        <select id="sampleRate">
+                            <option value="44100" selected>44.1kHz</option>
+                            <option value="48000">48kHz</option>
+                            <option value="22050">22.05kHz</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="options">
+                    <button class="btn process-btn" id="generateBtn">🎵 生成白噪音</button>
+                    <button class="btn btn-secondary clear-btn">🗑️ 清空</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2 class="section-title">生成结果</h2>
+                <div id="status" class="status-message"></div>
+                <div id="audioContainer" style="display: none;">
+                    <audio id="audioPlayer" controls style="width: 100%; margin-bottom: 1rem;"></audio>
+                    <div class="options">
+                        <button class="btn" id="downloadBtn">📥 下载音频</button>
+                        <button class="btn btn-secondary" id="stopBtn">⏹️ 停止播放</button>
+                    </div>
+                </div>
+                <div id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">生成中... 0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/white-noise.js"></script>
+</body>
+</html>

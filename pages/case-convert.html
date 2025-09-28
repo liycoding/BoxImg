@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大小写转换 - Box 工具集合</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="tool-page">
+        <header class="tool-header">
+            <div class="container">
+                <a href="../index.html" class="back-btn">
+                    ← 返回首页
+                </a>
+                <div class="header-content">
+                    <h1>🔄 大小写转换</h1>
+                    <p>转换文本的大小写格式，支持多种转换模式</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="tool-content">
+            <div class="input-section">
+                <h2 class="section-title">输入文本</h2>
+                <textarea 
+                    class="textarea input-textarea" 
+                    placeholder="请输入要转换的文本...&#10;&#10;示例：&#10;Hello World&#10;this is a test&#10;JAVASCRIPT PROGRAMMING"
+                ></textarea>
+                
+                <div class="options">
+                    <div class="option-group">
+                        <label for="convert-mode">转换模式：</label>
+                        <select id="convert-mode">
+                            <option value="lowercase">全部小写</option>
+                            <option value="uppercase">全部大写</option>
+                            <option value="title-case">标题格式</option>
+                            <option value="sentence-case">句子格式</option>
+                            <option value="camel-case">驼峰格式</option>
+                            <option value="snake-case">下划线格式</option>
+                            <option value="kebab-case">连字符格式</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn process-btn">开始转换</button>
+                    <button class="btn btn-secondary clear-btn">清空</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2 class="section-title">转换结果</h2>
+                <div class="output-text" style="min-height: 200px; background: white; border: 2px solid #e9ecef; border-radius: 8px; padding: 1rem; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word;"></div>
+                <div class="button-group" style="margin-top: 1rem;">
+                    <button class="btn copy-btn">复制结果</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/case-convert.js"></script>
+</body>
+</html>

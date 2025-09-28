@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box - 工具集合</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📦 Box</h1>
+            <p class="subtitle">实用工具集合</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="section-title">选择工具</h2>
+            <div class="tools-grid">
+                <!-- 字符串排序工具 -->
+                <div class="tool-card" data-tool="string-sort">
+                    <div class="tool-icon">📝</div>
+                    <h3 class="tool-title">字符串排序</h3>
+                    <p class="tool-description">按行对字符串进行排序，支持升序和降序</p>
+                    <div class="tool-tags">
+                        <span class="tag">文本处理</span>
+                        <span class="tag">排序</span>
+                    </div>
+                </div>
+
+                <!-- 字符重复次数统计工具 -->
+                <div class="tool-card" data-tool="char-count">
+                    <div class="tool-icon">🔢</div>
+                    <h3 class="tool-title">字符重复统计</h3>
+                    <p class="tool-description">统计每行中每个字符的重复次数</p>
+                    <div class="tool-tags">
+                        <span class="tag">文本分析</span>
+                        <span class="tag">统计</span>
+                    </div>
+                </div>
+
+                <!-- 文本去重工具 -->
+                <div class="tool-card" data-tool="text-dedup">
+                    <div class="tool-icon">🔄</div>
+                    <h3 class="tool-title">文本去重</h3>
+                    <p class="tool-description">去除重复的文本行，保留唯一内容</p>
+                    <div class="tool-tags">
+                        <span class="tag">文本处理</span>
+                        <span class="tag">去重</span>
+                    </div>
+                </div>
+
+                <!-- 大小写转换工具 -->
+                <div class="tool-card" data-tool="case-convert">
+                    <div class="tool-icon">🔄</div>
+                    <h3 class="tool-title">大小写转换</h3>
+                    <p class="tool-description">转换文本的大小写格式</p>
+                    <div class="tool-tags">
+                        <span class="tag">文本处理</span>
+                        <span class="tag">格式转换</span>
+                    </div>
+                </div>
+
+                <!-- 文本替换工具 -->
+                <div class="tool-card" data-tool="text-replace">
+                    <div class="tool-icon">🔄</div>
+                    <h3 class="tool-title">文本替换</h3>
+                    <p class="tool-description">批量替换文本中的指定内容</p>
+                    <div class="tool-tags">
+                        <span class="tag">文本处理</span>
+                        <span class="tag">替换</span>
+                    </div>
+                </div>
+
+                <!-- 行号添加工具 -->
+                <div class="tool-card" data-tool="line-numbers">
+                    <div class="tool-icon">📊</div>
+                    <h3 class="tool-title">添加行号</h3>
+                    <p class="tool-description">为文本的每一行添加行号</p>
+                    <div class="tool-tags">
+                        <span class="tag">文本处理</span>
+                        <span class="tag">格式化</span>
+                    </div>
+                </div>
+
+                <!-- 列表项统计工具 -->
+                <div class="tool-card" data-tool="item-statistics">
+                    <div class="tool-icon">📈</div>
+                    <h3 class="tool-title">列表项统计</h3>
+                    <p class="tool-description">统计文本列表中每个项目出现的次数</p>
+                    <div class="tool-tags">
+                        <span class="tag">数据分析</span>
+                        <span class="tag">统计</span>
+                    </div>
+                </div>
+
+                <!-- 白噪音生成工具 -->
+                <div class="tool-card" data-tool="white-noise">
+                    <div class="tool-icon">🎵</div>
+                    <h3 class="tool-title">白噪音生成</h3>
+                    <p class="tool-description">生成指定时长的白噪音音频，支持在线播放和下载</p>
+                    <div class="tool-tags">
+                        <span class="tag">音频工具</span>
+                        <span class="tag">生成器</span>
+                    </div>
+                </div>
+
+                <!-- 地图图钉工具 -->
+                <div class="tool-card" data-tool="map-pins">
+                    <div class="tool-icon">📍</div>
+                    <h3 class="tool-title">地图图钉</h3>
+                    <p class="tool-description">在地图上显示OpenStreetMap坐标数据，支持智能聚合</p>
+                    <div class="tool-tags">
+                        <span class="tag">地图工具</span>
+                        <span class="tag">坐标</span>
+                        <span class="tag">聚合</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Box 工具集合. 让文本处理更简单.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 添加额外的调试和备用点击处理
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('备用脚本加载完成');
+            
+            // 备用点击处理
+            document.querySelectorAll('.tool-card').forEach((card, index) => {
+                console.log(`备用处理：找到卡片 ${index + 1}`);
+                
+                // 添加备用点击事件
+                card.addEventListener('click', function(e) {
+                    console.log('备用点击事件触发');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const toolId = this.getAttribute('data-tool');
+                    console.log('备用处理：点击了工具', toolId);
+                    
+                    if (toolId) {
+                        const toolPage = 'pages/' + toolId + '.html';
+                        console.log('备用处理：准备跳转到', toolPage);
+                        window.location.href = toolPage;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
