@@ -93,6 +93,128 @@ npx http-server
 # 右键index.html选择"Open with Live Server"
 ```
 
+## 部署到 GitHub Pages
+
+### 环境要求
+- Node.js (推荐 v16+)
+- npm (推荐 v8+)
+- Git
+
+### 安装步骤
+
+#### 第一步：克隆项目
+```bash
+git clone git@github.com:liycoding/BoxImg.git
+cd BoxImg
+```
+
+#### 第二步：验证项目文件
+```bash
+# 确认在正确的目录下
+pwd
+# 应该显示：/path/to/BoxImg
+
+# 检查项目文件
+ls -la
+# 应该看到：package.json, index.html, css/, js/, pages/ 等
+
+# 验证 package.json
+cat package.json
+```
+
+#### 第三步：安装依赖
+```bash
+# 清理可能的缓存
+npm cache clean --force
+
+# 安装项目依赖
+npm install
+```
+
+**预期输出：**
+```
+added 50 packages, and audited 50 packages in 2s
+found 0 vulnerabilities
+```
+
+#### 第四步：验证 gh-pages 安装
+```bash
+# 检查 gh-pages 是否安装成功
+ls node_modules/.bin/gh-pages
+# 应该看到：gh-pages -> ../gh-pages/bin/gh-pages.js
+
+# 测试 gh-pages 版本
+./node_modules/.bin/gh-pages --version
+# 应该显示：6.3.0
+```
+
+#### 第五步：部署到 GitHub Pages
+```bash
+# 使用 npm 脚本部署
+npm run deploy-gh-pages
+```
+
+**部署过程：**
+1. 自动构建项目到 `dist/` 目录
+2. 将 `dist/` 内容推送到 `gh-pages` 分支
+3. GitHub Pages 自动更新网站
+
+### 常见问题解决
+
+#### 问题 1：找不到 package.json
+```bash
+# 错误：在错误的目录下执行 npm install
+# 解决：确保在项目根目录下
+pwd
+cd /path/to/BoxImg
+ls package.json
+```
+
+#### 问题 2：权限问题
+```bash
+# 检查目录权限
+ls -la /path/to/BoxImg
+# 确保有读取权限
+
+# 如果需要，修改权限
+chmod -R 755 /path/to/BoxImg
+```
+
+#### 问题 3：npm 缓存问题
+```bash
+# 清理所有缓存并重新安装
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+```
+
+#### 问题 4：网络问题
+```bash
+# 使用国内镜像
+npm config set registry https://registry.npmmirror.com
+npm install
+```
+
+#### 问题 5：SSH 密钥问题
+```bash
+# 测试 GitHub SSH 连接
+ssh -T git@github.com
+# 应该看到：Hi liycoding! You've successfully authenticated...
+```
+
+### 部署验证
+
+部署成功后，访问以下地址查看网站：
+- **GitHub Pages**: `https://liycoding.github.io/BoxImg/`
+- **GitHub 仓库**: `https://github.com/liycoding/BoxImg`
+
+### 自动化部署
+
+项目已配置自动化部署脚本，每次推送代码到 `main` 分支时，GitHub Actions 会自动：
+1. 构建项目
+2. 部署到 GitHub Pages
+3. 更新网站内容
+
 ## 功能详解
 
 ### 列表项统计工具
